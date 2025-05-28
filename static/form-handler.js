@@ -1,5 +1,5 @@
 // Enhanced form submission handler for the crypto referral landing page
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function( ) {
   // Get the signup form element
   const signupForm = document.getElementById('referralForm');
   const formSuccess = document.getElementById('formSuccess');
@@ -81,17 +81,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // Prepare data for submission
+      // Prepare data for submission - FIXED: Using flat structure instead of nested
       const referralData = {
         name: userName,
         email: userEmail,
         phone: userPhone,
-        earnings: {
-          daily: earningsDaily,
-          weekly: earningsWeekly,
-          monthly: earningsMonthly,
-          yearly: earningsYearly
-        },
+        daily_earnings: earningsDaily,
+        weekly_earnings: earningsWeekly,
+        monthly_earnings: earningsMonthly,
+        yearly_earnings: earningsYearly,
         referrer: referrerName
       };
       
@@ -116,13 +114,13 @@ document.addEventListener('DOMContentLoaded', function() {
           signupForm.style.display = 'none';
           formSuccess.style.display = 'block';
           
-          if (data.page_url) {
-            const fullUrl = window.location.origin + data.page_url;
+          if (data.referral_url) {
+            const fullUrl = window.location.origin + data.referral_url;
             newPageUrl.innerHTML = `You can access it at: <a href="${fullUrl}" target="_blank">${fullUrl}</a>`;
           }
         } else {
           // Error handling
-          const errorMessage = data.errors ? data.errors.join(', ') : 'An error occurred. Please try again.';
+          const errorMessage = data.error || 'An error occurred. Please try again.';
           alert(`Submission failed: ${errorMessage}`);
           submitButton.textContent = originalButtonText;
           submitButton.disabled = false;
