@@ -1,5 +1,5 @@
 // Enhanced form submission handler for the crypto referral landing page
-document.addEventListener('DOMContentLoaded', function( ) {
+document.addEventListener('DOMContentLoaded', function() {
   // Get the signup form element
   const signupForm = document.getElementById('referralForm');
   const formSuccess = document.getElementById('formSuccess');
